@@ -5,6 +5,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { TodosModule } from './todos/todos.module';
 import { UsersModule } from './users/users.module';
 import { ConfigModule, ConfigService } from '@nestjs/config';
+import { PersonsModule } from './persons/persons.module';
 
 @Module({
   imports: [
@@ -16,7 +17,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
       useFactory: (configService: ConfigService) => ({
         type: configService.get<string>('DB_TYPE') as 'postgres',
         host: configService.get<string>('DB_HOST'),
-        port: +configService.get<number>('DB_PORT'),
+        port: Number(configService.get<number>('DB_PORT')),
         username: configService.get<string>('DB_USERNAME'),
         password: configService.get<string>('DB_PASSWORD'),
         database: configService.get<string>('DB_NAME'),
@@ -27,6 +28,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
     }),
     TodosModule,
     UsersModule,
+    PersonsModule,
   ],
   controllers: [AppController],
   providers: [AppService],

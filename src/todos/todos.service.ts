@@ -26,14 +26,16 @@ export class TodosService {
     return this.todosRepository.find();
   }
 
-  findOne(id: number): Promise<Todo> {
+  findOne(id: number): Promise<Todo | undefined> {
     return this.todosRepository.findOne(id);
   }
 
   async update(id: number, updateTodoDto: UpdateTodoDto) {
     const todo = await this.todosRepository.findOne(id);
 
-    this.todosRepository.save(todo);
+    if (todo) {
+      this.todosRepository.save(todo);
+    }
 
     return `This action updates a #${id} todo`;
   }

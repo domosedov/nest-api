@@ -33,12 +33,12 @@ async function bootstrap() {
         sameSite: 'lax',
         maxAge: 1000 * 60 * 60 * 24,
       },
-      secret: SESSION_SECRET,
+      secret: SESSION_SECRET ?? 'secret',
       resave: false,
       saveUninitialized: false,
     }),
   );
 
-  await app.listen(PORT);
+  await app.listen(PORT ?? 8000);
 }
 bootstrap();

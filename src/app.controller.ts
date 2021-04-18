@@ -21,7 +21,7 @@ export class AppController {
     session.destroy((err) => {
       console.log(err);
     });
-    response.clearCookie('session');
+    response.clearCookie('qid');
     return 'hi';
   }
 
